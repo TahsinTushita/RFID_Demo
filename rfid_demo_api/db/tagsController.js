@@ -14,24 +14,12 @@ exports.getAll = (req, res) => {
 };
 
 exports.bulkCreate = (req, res) => {
-  // Validate request
-  // if (!req.body) {
-  //   res.status(400).send({
-  //     message: "Content can not be empty!",
-  //   });
-  // }
+  // const values = [
+  //   [15, "dsv6989654w", "red31bgt"],
+  //   [16, "vewfedf54dw", "pink37tgt"],
+  // ];
 
-  // register a tag
-  // const dc_tags = new DC_tags({
-  //   tid: req.body.tid,
-  //   style: req.body.style,
-  // });
-
-  // Save tag in the database
-  const values = [
-    [15, "dsv6989654w", "red31bgt"],
-    [16, "vewfedf54dw", "pink37tgt"],
-  ];
+  const values = req.body;
 
   DC_tags.bulkCreate(values, (err, data) => {
     if (err)

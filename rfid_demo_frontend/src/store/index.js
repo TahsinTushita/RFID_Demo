@@ -50,6 +50,38 @@ export default createStore({
           console.log(error);
         };
     },
+
+    createStyle({ commit }, data) {
+      axios
+        .post("http://localhost:5000/dc_inventory/create", data)
+        .then((res) => {
+          console.log(res.data);
+          this.dispatch("getStyles");
+        }),
+        (error) => {
+          console.log(error);
+        };
+    },
+
+    registerTids({ commit }, data) {
+      const values = [];
+      let a = 17;
+      const style = data.style;
+      for (const item of data.tidsArray) {
+        values.push([a, item, style]);
+        a++;
+      }
+
+      axios
+        .post("http://localhost:5000/dc_tags/bulkCreate", values)
+        .then((res) => {
+          console.log(res);
+          this.dispatch("getTids");
+        }),
+        (error) => {
+          console.log(error);
+        };
+    },
   },
 
   getters: {

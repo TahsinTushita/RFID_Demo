@@ -1,3 +1,4 @@
+
 <template>
   <form @submit.prevent="registerTags">
 
@@ -9,14 +10,15 @@
     </select>
 
     <label>Tid:</label>
-    <input type="text" v-model="tid" @keyup.enter="addTid(tid.length)"/>
-    <div v-for="tid in tempTids" :key="tid" class="pill">
+    <input type="text" v-model="tid" v-on:keydown.enter.prevent="addTid(tid.length)" />
+
+    <li v-for="tid in tempTids" :key="tid" class="x-pill">
       <span @click="deleteTid(tid)">
         {{ tid }} {{ tid.length }}
       </span>
-    </div>
+    </li>
 
-    <div class="submit" >
+    <div >
       <button type="submit">Regiter Tags</button>
     </div>
 
@@ -32,7 +34,7 @@ export default {
       tid: null,
       tempTids: [],
       style: null,
-      values: []
+      values: [],
     };
   },
 
@@ -78,12 +80,13 @@ export default {
     },
 
     registerTags() {
-      if(this.tempTids) {
-
-        this.tempTids.forEach(i => {
-          this.values.push([17,this.tempTids[i], this.style]);
-        })
+      if(this.tempTids.length && this.style) {
+        console.log(this.style)
+        const data = {tidsArray: this.tempTids, style: this.style}
+        this.$store.dispatch('registerTids', data)
       }
+
+      alert("form submitted");
     }
   },
 };
@@ -161,3 +164,4 @@ button {
   font-weight: bold;
 }
 </style>
+

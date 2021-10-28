@@ -53,6 +53,7 @@ DC_inventory.create = (data, result) => {
     }
 
     console.log({ id: res.insertId, ...data });
+    console.log("New Style created");
     result(null, { id: res.insertId, ...data });
   });
 };
@@ -69,6 +70,7 @@ DC_tags.bulkCreate = (values, result) => {
       }
 
       console.log({ id: res.insertId, ...values });
+      console.log("Tids registered");
       result(null, { id: res.insertId, ...values });
     }
   );

@@ -57,6 +57,23 @@ DC_inventory.create = (data, result) => {
   });
 };
 
+DC_tags.bulkCreate = (values, result) => {
+  connection.query(
+    "INSERT INTO dc_tags (id, tid, style) VALUES ?",
+    [values],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+
+      console.log({ id: res.insertId, ...values });
+      result(null, { id: res.insertId, ...values });
+    }
+  );
+};
+
 DC_inventory.delete = (style, result) => {
   connection.query(
     "DELETE FROM dc_inventory WHERE style = ?",

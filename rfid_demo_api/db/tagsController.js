@@ -13,6 +13,36 @@ exports.getAll = (req, res) => {
   });
 };
 
+exports.bulkCreate = (req, res) => {
+  // Validate request
+  // if (!req.body) {
+  //   res.status(400).send({
+  //     message: "Content can not be empty!",
+  //   });
+  // }
+
+  // register a tag
+  // const dc_tags = new DC_tags({
+  //   tid: req.body.tid,
+  //   style: req.body.style,
+  // });
+
+  // Save tag in the database
+  const values = [
+    [15, "dsv6989654w", "red31bgt"],
+    [16, "vewfedf54dw", "pink37tgt"],
+  ];
+
+  DC_tags.bulkCreate(values, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while registering the Tag.",
+      });
+    else res.send(data);
+  });
+};
+
 exports.create = (req, res) => {
   // Validate request
   if (!req.body) {

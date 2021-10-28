@@ -1,5 +1,5 @@
 <template>
-  <form >
+  <form @submit.prevent="registerTags">
 
     <label>Style:</label>
     <select v-model="style">
@@ -9,15 +9,15 @@
     </select>
 
     <label>Tid:</label>
-    <input type="text" v-model="tid" @keyup.enter="addTid(tid.length)" @keyup.enter.prevent="registerTags"/>
+    <input type="text" v-model="tid" @keyup.enter="addTid(tid.length)"/>
     <div v-for="tid in tempTids" :key="tid" class="pill">
       <span @click="deleteTid(tid)">
         {{ tid }} {{ tid.length }}
       </span>
     </div>
 
-    <div class="submit" @click.ctrl.exact="registerTags">
-      <button>Regiter Tags</button>
+    <div class="submit" >
+      <button type="submit">Regiter Tags</button>
     </div>
 
   </form>

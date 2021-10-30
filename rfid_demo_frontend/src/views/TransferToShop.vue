@@ -13,7 +13,7 @@
 
     <li v-for="tid in justTids" :key="tid" class="x-pill">
       <span>
-        {{ tid }} {{ tid.length }}
+        {{ tid }}
       </span>
     </li>
 
@@ -22,9 +22,18 @@
     </div>
 
   </form>
+
+  <div v-if="showModal">
+    <Modal :header="header" :text="text" @close="toggleModal">
+      <h3>{{ message }}</h3>
+    </Modal>
+  </div>
+
 </template>
 
 <script>
+import Modal from "../components/Modal.vue"
+
 export default {
     data() {
     return {
@@ -34,12 +43,16 @@ export default {
       justTids: [],
       tempTids: [],
       tid: null,
-      lastStyle: null
+      lastStyle: null,
+      showModal: false,
+      message: "Tags transferred to shop"
     };
   },
+  components: { Modal },
 
   mounted() {
     this.$store.dispatch('getTids')
+    this.$store.dispatch('getOngoingShops')
   },
 
   computed: {
@@ -47,6 +60,12 @@ export default {
         get() {
           return this.$store.getters.allTids
         }
+      },
+
+      ongoingShops: {
+          get() {
+              return this.$store.getters.ongoingShops
+          }
       }
   },
 
@@ -60,7 +79,7 @@ export default {
                           console.log(tid)
                           if(this.lastStyle) {
                               if(tid.style === this.lastStyle) {
-                                if(!this.justTids.includes(this.tid)) {
+                                if(!this.justTids.includes(this.tid) && !this.ongoingShops.includes(this.tid)) {
                                     this.justTids.push(this.tid)
                                     this.tempTids.push(tid)
                                 }
@@ -90,9 +109,15 @@ export default {
             console.log(this.$store.getters.stock)
             const data = { tidsArray: this.tempTids, style: this.lastStyle, amount: this.tempTids.length, shop: this.shop }
             this.$store.dispatch('registerTidsToOngoingShop', data)
+            this.showModal = true
         }
 
-        alert("transferring")
+        // alert("transferring")
+    },
+
+    toggleModal() {
+        this.showModal = false
+        window.location.reload()
     }
   }
 }

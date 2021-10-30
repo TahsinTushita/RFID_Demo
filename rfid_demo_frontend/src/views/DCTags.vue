@@ -14,7 +14,7 @@
 
     <li v-for="tid in tempTids" :key="tid" class="x-pill">
       <span @click="deleteTid(tid)">
-        {{ tid }} {{ tid.length }}
+        {{ tid }}
       </span>
     </li>
 
@@ -23,11 +23,20 @@
     </div>
 
   </form>
+
+  <div v-if="showModal">
+    <Modal :header="header" :text="text" @close="toggleModal">
+      <h3>{{ message }}</h3>
+    </Modal>
+  </div>
 </template>
 
 <script>
+import Modal from "../components/Modal.vue"
+
 export default {
   name: "DCTags",
+  components:{ Modal },
   data() {
     return {
       regTids: [],
@@ -35,6 +44,8 @@ export default {
       tempTids: [],
       style: null,
       values: [],
+      message: "Tags registered",
+      showModal: false
     };
   },
 
@@ -84,9 +95,16 @@ export default {
         const stock = this.style.stock + this.tempTids.length
         const data = {tidsArray: this.tempTids, style: this.style.style, name: this.style.name, colour: this.style.colour, sz: this.style.sz, price: this.style.price, stock: stock}
         this.$store.dispatch('registerTids', data)
+        this.showModal = true
       }
 
-      alert("form submitted");
+      // alert("form submitted");
+      
+    },
+
+    toggleModal() {
+      this.showModal = false
+      window.location.reload()
     }
   },
 };

@@ -16,9 +16,18 @@
             <button type="submit">Sell</button>
         </div>
     </form>
+
+    <div v-if="showModal">
+        <Modal :header="header" :text="text" @close="toggleModal">
+            <h3>{{ message }}</h3>
+        </Modal>
+  </div>
+
 </template>
 
 <script>
+import Modal from "../components/Modal.vue"
+
 export default {
     data () {
         return {
@@ -28,9 +37,12 @@ export default {
             style: null,
             size: null,
             price: null,
-            tempTid: null
+            tempTid: null,
+            showModal: false,
+            message: "Product sold"
         };
     },
+    components: { Modal },
 
     mounted() {
         this.$store.dispatch('getOngoingShops')
@@ -70,7 +82,13 @@ export default {
         sellProduct() {
             if(this.tempTid) {
                 this.$store.dispatch('deleteFromOngoingShop', this.tempTid)
+                this.showModal = true
             }
+        },
+
+        toggleModal() {
+            this.showModal = false
+            window.location.reload()
         }
     }
 }

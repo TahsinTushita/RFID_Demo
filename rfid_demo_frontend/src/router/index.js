@@ -1,11 +1,23 @@
 import { createRouter, createWebHistory } from "vue-router";
 import DCTags from "../views/DCTags.vue";
+import TransferToShop from "../views/TransferToShop.vue";
+import Shop from "../views/Shop.vue";
 
 const routes = [
   {
     path: "/",
     name: "DCTags",
     component: DCTags,
+  },
+  {
+    path: "/transferToShop",
+    name: "TransferToShop",
+    component: TransferToShop,
+  },
+  {
+    path: "/shop",
+    name: "Shop",
+    component: Shop,
   },
   {
     path: "/dcStyles",

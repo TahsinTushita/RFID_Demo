@@ -4,7 +4,7 @@
 
     <label>Style:</label>
     <select v-model="style">
-      <option v-for="style in styles" :value="style.style" :key="style.id">
+      <option v-for="style in styles" :value="style" :key="style.id">
         {{ style.style }}
       </option>
     </select>
@@ -81,8 +81,8 @@ export default {
 
     registerTags() {
       if(this.tempTids.length && this.style) {
-        console.log(this.style)
-        const data = {tidsArray: this.tempTids, style: this.style}
+        const stock = this.style.stock + this.tempTids.length
+        const data = {tidsArray: this.tempTids, style: this.style.style, name: this.style.name, colour: this.style.colour, sz: this.style.sz, price: this.style.price, stock: stock}
         this.$store.dispatch('registerTids', data)
       }
 
@@ -100,6 +100,8 @@ form {
   text-align: left;
   padding: 40px;
   border-radius: 10px;
+  box-shadow: 3px 6px gray;
+  border: 1px solid gray;
 }
 
 label {
@@ -120,7 +122,7 @@ select {
   box-sizing: border-box;
   border: none;
   border-bottom: 1px solid #ddd;
-  color: #555;
+  background: white;
 }
 
 input[type="checkbox"] {
@@ -129,6 +131,10 @@ input[type="checkbox"] {
   margin: 0 10px 0 0;
   position: relative;
   top: 2px;
+}
+
+input, select:focus {
+  outline: none;
 }
 
 .pill {
@@ -157,11 +163,5 @@ button {
   text-align: center;
 }
 
-.error{
-  color: #ff0062;
-  margin-top: 10px;
-  font-size: 0.8em;
-  font-weight: bold;
-}
 </style>
 

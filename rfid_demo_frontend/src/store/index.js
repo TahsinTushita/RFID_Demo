@@ -41,7 +41,7 @@ export default createStore({
   },
   actions: {
     getStyles({ commit }) {
-      axios.get("http://localhost:5000/dc_inventory").then((res) => {
+      axios.get("http://103.55.144.152:8080/dc_inventory").then((res) => {
         commit("SET_STYLES", res.data);
         console.log(res.data);
       }),
@@ -51,7 +51,7 @@ export default createStore({
     },
 
     getTids({ commit }) {
-      axios.get("http://localhost:5000/dc_tags").then((res) => {
+      axios.get("http://103.55.144.152:8080/dc_tags").then((res) => {
         // commit("SET_TIDS", res.data);
         const justTids = [];
         let lastTidId = 0;
@@ -74,7 +74,7 @@ export default createStore({
 
     createStyle({ commit }, data) {
       axios
-        .post("http://localhost:5000/dc_inventory/create", data)
+        .post("http://103.55.144.152:8080/dc_inventory/create", data)
         .then((res) => {
           console.log(res.data);
           this.dispatch("getStyles");
@@ -86,7 +86,7 @@ export default createStore({
 
     updateStyleStock({ commit }, data) {
       axios
-        .put("http://localhost:5000/dc_inventory/update", data)
+        .put("http://103.55.144.152:8080/dc_inventory/update", data)
         .then((res) => {
           console.log(res.data);
           this.dispatch("getStyles");
@@ -112,7 +112,7 @@ export default createStore({
       }
 
       axios
-        .post("http://localhost:5000/dc_tags/bulkCreate", values)
+        .post("http://103.55.144.152:8080/dc_tags/bulkCreate", values)
         .then((res) => {
           console.log(res);
           this.dispatch("getTids");
@@ -148,7 +148,7 @@ export default createStore({
       }
 
       axios
-        .post("http://localhost:5000/ongoing_to_shop/bulkCreate", values)
+        .post("http://103.55.144.152:8080/ongoing_to_shop/bulkCreate", values)
         .then((res) => {
           console.log(res.data);
           this.dispatch("updateStyleStock", payload);
@@ -161,7 +161,7 @@ export default createStore({
 
     getStock({ commit }, style) {
       axios
-        .get("http://localhost:5000/dc_inventory/getStock/" + style)
+        .get("http://103.55.144.152:8080/dc_inventory/getStock/" + style)
         .then((res) => {
           console.log(res.data);
           commit("SET_STOCK", res.data);
@@ -172,7 +172,7 @@ export default createStore({
     },
 
     getOngoingShops({ commit }) {
-      axios.get("http://localhost:5000/ongoing_to_shop").then((res) => {
+      axios.get("http://103.55.144.152:8080/ongoing_to_shop").then((res) => {
         commit("SET_ONGOING_SHOPS", res.data);
         console.log(res.data);
       }),
@@ -187,7 +187,7 @@ export default createStore({
 
     deleteStyle({ commit }, style) {
       axios
-        .delete("http://localhost:5000/dc_inventory/delete/" + style)
+        .delete("http://103.55.144.152:8080/dc_inventory/delete/" + style)
         .then((res) => {
           console.log(res.data);
           this.dispatch("getStyles");
@@ -199,7 +199,7 @@ export default createStore({
 
     deleteFromDcTags({ commit }, tid) {
       axios
-        .delete("http://localhost:5000/dc_tags/delete/" + tid)
+        .delete("http://103.55.144.152:8080/dc_tags/delete/" + tid)
         .then((res) => {
           console.log(res.data);
           this.dispatch("getTids");
@@ -211,7 +211,7 @@ export default createStore({
 
     deleteFromOngoingShop({ commit }, tid) {
       axios
-        .delete("http://localhost:5000/ongoing_to_shop/delete/" + tid)
+        .delete("http://103.55.144.152:8080/ongoing_to_shop/delete/" + tid)
         .then((res) => {
           console.log(res.data);
           this.dispatch("getOngoingShops");
@@ -224,7 +224,7 @@ export default createStore({
 
     updateShop({ commit }, data) {
       axios
-        .put("http://localhost:5000/ongoing_to_shop/update", data)
+        .put("http://103.55.144.152:8080/ongoing_to_shop/update", data)
         .then((res) => {
           console.log(res.data);
           this.dispatch("getOngoingShops");

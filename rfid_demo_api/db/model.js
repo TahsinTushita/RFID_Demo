@@ -53,6 +53,11 @@ const OngoingToShop = function (ongoingToShop) {
   this.price = ongoingToShop.price;
 };
 
+const OngoingToShopUpdate = function (shopUpdate) {
+  this.shop = shopUpdate.shop;
+  this.tid = shopUpdate.tid;
+};
+
 DC_inventory.getAll = (result) => {
   connection.query("SELECT * FROM dc_inventory", (err, res) => {
     if (err) {
@@ -117,6 +122,26 @@ DC_inventory_update.updateStock = (style, result) => {
       result(null, { ...style });
     }
   );
+};
+
+OngoingToShopUpdate.updateShop = (data, result) => {
+  const q = `UPDATE ongoing_to_shop SET shop = '${data.shop}' WHERE tid = '${data.tid}'`;
+
+  connection.query(q, (err, res) => {
+    if (err) {
+      console.log(err);
+      result(null, err);
+      return;
+    }
+
+    if (res.affectedRows == 0) {
+      result({ kind: "NOT FOUND" }, null);
+      return;
+    }
+
+    // console.log("updated shop", ...data);
+    result(null, { ...data });
+  });
 };
 
 DC_tags.bulkCreate = (values, result) => {
@@ -264,4 +289,5 @@ module.exports = {
   DC_inventory_update,
   DC_tags,
   OngoingToShop,
+  OngoingToShopUpdate,
 };

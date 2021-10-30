@@ -1,12 +1,13 @@
 <template>
   <form @submit.prevent="transferToShop">
 
-    <label>Shop:</label>
+    <!-- <label>Store:</label>
     <select v-model="shop">
       <option v-for="shop in shops" :value="shop.shop" :key="shop.id">
         {{ shop.shop }}
       </option>
-    </select>
+    </select> -->
+    <h2>Store</h2>
 
     <label>Tid:</label>
     <input type="text" v-model="tid" v-on:keydown.enter.prevent="addTid(tid.length)" />
@@ -37,15 +38,14 @@ import Modal from "../components/Modal.vue"
 export default {
     data() {
     return {
-      shops: [{id: 1, shop: "Shop 1"},
-            {id: 2, shop: "Shop 2"}],
-      shop: null,
+      // shops: "store",
+      shop: "store",
       justTids: [],
       tempTids: [],
       tid: null,
       lastStyle: null,
       showModal: false,
-      message: "Tags transferred to shop"
+      message: "Product added to store"
     };
   },
   components: { Modal },

@@ -2,7 +2,7 @@
 <template>
   <form @submit.prevent="registerTags">
 
-    <label>Style:</label>
+    <label>Model:</label>
     <select v-model="style">
       <option v-for="style in styles" :value="style" :key="style.id">
         {{ style.style }}
@@ -44,7 +44,7 @@ export default {
       tempTids: [],
       style: null,
       values: [],
-      message: "Tags registered",
+      message: "Tags registered to products",
       showModal: false
     };
   },

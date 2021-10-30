@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import DCTags from "../views/DCTags.vue";
 import TransferToShop from "../views/TransferToShop.vue";
 import Shop from "../views/Shop.vue";
+import ServerRoom from "../views/ServerRoom.vue";
 
 const routes = [
   {
@@ -13,6 +14,11 @@ const routes = [
     path: "/transferToShop",
     name: "TransferToShop",
     component: TransferToShop,
+  },
+  {
+    path: "/serverRoom",
+    name: "ServerRoom",
+    component: ServerRoom,
   },
   {
     path: "/shop",

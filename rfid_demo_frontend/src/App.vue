@@ -1,9 +1,9 @@
 <template>
   <div id="nav">
-    <router-link to="/dcStyles">DC Styles</router-link> |
-    <router-link to="/">DC Tags</router-link> |
-    <router-link to="/transferToShop">Transfer To Shop</router-link> |
-    <router-link to="/shop">Shop</router-link>
+    <router-link to="/dcStyles">Product Types</router-link> |
+    <router-link to="/">Assign Tags to Products</router-link> |
+    <router-link to="/transferToShop">Add Product to Store</router-link> |
+    <router-link to="/serverRoom">Move Product to Server Room</router-link>
   </div>
   <router-view />
 </template>

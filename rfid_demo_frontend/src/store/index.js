@@ -221,6 +221,18 @@ export default createStore({
           console.log(error);
         };
     },
+
+    updateShop({ commit }, data) {
+      axios
+        .put("http://localhost:5000/ongoing_to_shop/update", data)
+        .then((res) => {
+          console.log(res.data);
+          this.dispatch("getOngoingShops");
+        }),
+        (error) => {
+          console.log(error);
+        };
+    },
   },
 
   getters: {

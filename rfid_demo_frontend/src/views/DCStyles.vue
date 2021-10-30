@@ -1,22 +1,24 @@
 <template>
   <form>
-    <label>Name:</label>
-    <input type="text" required v-model="name"/>
 
-    <label>Colour:</label>
+    <label>Type:</label>
     <input type="text" required v-model="colour"/>
 
-    <label>Size:</label>
+    <label>Model:</label>
+    <input type="text" required v-model="style"/>
+
+    <label>Manufacturer:</label>
+    <input type="text" required v-model="name"/>
+
+    <!-- <label>Size:</label>
     <input type="text" required v-model="sz"/>
 
     <label>Price:</label>
-    <input type="number" required v-model="price"/>
+    <input type="number" required v-model="price"/> -->
 
-    <label>Style:</label>
-    <input type="text" required v-model="style"/>
 
     <div class="submit">
-      <button @click="createStyle">Create Style</button>
+      <button @click="createStyle">Add new Product</button>
     </div>
   </form>
 </template>
@@ -29,8 +31,8 @@ export default {
    return {
      name: null,
      colour: null,
-     sz: null,
-     price: null,
+     sz: "M",
+     price: 0,
      style: null,
      stock: 0
    }; 
@@ -50,15 +52,17 @@ export default {
 
   methods: {
     createStyle() {
-      if(this.style && this.name && this.colour && this.sz && this.price) {
+      if(this.style && this.name && this.colour) {
         const data = { style: this.style, stock: this.stock, name: this.name, colour: this.colour, sz: this.sz, price: this.price }
         this.$store.dispatch('createStyle', data)
         this.style = null
         this.name = null
         this.colour = null
-        this.sz = null
-        this.price = null
+        // this.sz = null
+        // this.price = null
       }
+
+      alert("New Product Added")
     }
   }
 

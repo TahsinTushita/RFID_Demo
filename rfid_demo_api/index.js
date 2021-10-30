@@ -36,6 +36,7 @@ app.post("/dc_tags/bulkCreate", tagsController.bulkCreate);
 app.post("/ongoing_to_shop/bulkCreate", ongoingToShopController.bulkCreate);
 app.delete("/ongoing_to_shop/delete/:tid", ongoingToShopController.delete);
 app.get("/ongoing_to_shop", ongoingToShopController.getAll);
+app.put("/ongoing_to_shop/update", ongoingToShopController.update);
 
 app.listen(process.env.PORT, () => {
   console.log("Server is running on port " + process.env.PORT);
